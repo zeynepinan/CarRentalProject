@@ -14,19 +14,23 @@ namespace ConsoleUI
 
 
             Car car = new Car();
-            car.BrandId = 5;
-            car.ColorId = 1;
-            car.ModelYear = "2004";
-            car.DailyPrice = 250;
-            car.Description = "Yeni araba";
+            car.CarName = "Enzo Ferrari";
+            car.BrandId = 4;
+            car.ColorId = 6;
+            car.ModelYear = "2000";
+            car.DailyPrice = 230;
+            car.Description = "Ferrari çok iyi";
 
             carManager.Add(car);
 
-            foreach (var c in carManager.GetCarsByBrandId(7))
+            //foreach (var c in carManager.GetCarsByBrandId(7))
+            //{
+            //    Console.WriteLine(c.Description);
+            //}
+            foreach (var c in carManager.GetCarDetails() )
             {
-                Console.WriteLine(c.Description);
+                Console.WriteLine(c.CarName+" / "+ c.BrandName+" / "+c.ColorName +" / "+ c.DailyPrice );
             }
-            
 
         }
     }
