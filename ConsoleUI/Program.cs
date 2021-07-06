@@ -14,11 +14,11 @@ namespace ConsoleUI
 
 
             Car car = new Car();
-            car.BrandId = 7;
-            car.ColorId = 3;
-            car.ModelYear = "2000";
-            car.DailyPrice = 0;
-            car.Description = "ucuz ve güzel";
+            car.BrandId = 5;
+            car.ColorId = 1;
+            car.ModelYear = "2004";
+            car.DailyPrice = 250;
+            car.Description = "Yeni araba";
 
             carManager.Add(car);
 
