@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,14 +21,19 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
+            if (car.Description.Length <= 2)
+            {
+                return new ErrorResult(Messages.CarNameInValid);
+            }
+           
             _carDal.Add(car);
-            return new SuccessResult();
+            return new SuccessResult(Messages.Added);
         }
 
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new SuccessResult();
+            return new SuccessResult(Messages.Deleted);
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -42,6 +48,10 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
+            if (DateTime.Now.Hour == 12)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
@@ -58,7 +68,7 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _carDal.Update(car);
-            return new SuccessResult();
+            return new SuccessResult(Messages.Updated);
         }
     }
 }

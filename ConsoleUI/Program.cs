@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
+            CarTest();
 
             //ColorTest();
 
@@ -26,12 +26,12 @@ namespace ConsoleUI
             brandManager.Update(new Brand { BrandId = 1, BrandName = " Alfa romeo" });
             brandManager.Delete(new Brand { BrandId = 1002 });
 
-            Console.WriteLine(brandManager.GetById(1).BrandName);
+            //Console.WriteLine(brandManager.GetById(1).BrandName);
 
-            foreach (var b in brandManager.GetAll())
-            {
-                Console.WriteLine(b.BrandName);
-            }
+            //foreach (var b in brandManager.GetAll())
+            //{
+            //    Console.WriteLine(b.BrandName);
+            //}
         }
 
         private static void ColorTest()
@@ -43,12 +43,12 @@ namespace ConsoleUI
             colorManager.Update(new Color { ColorId = 1004, ColorName = "Koyu Yeşil" });
             colorManager.Delete(new Color { ColorId = 1003 });
 
-            Console.WriteLine(colorManager.GetById(7).ColorName);
+            //Console.WriteLine(colorManager.GetById(7).ColorName);
 
-            foreach (var cl in colorManager.GetAll())
-            {
-                Console.WriteLine(cl.ColorName);
-            }
+            //foreach (var cl in colorManager.GetAll())
+            //{
+            //    Console.WriteLine(cl.ColorName);
+            //}
         }
 
         private static void CarTest()
@@ -60,33 +60,51 @@ namespace ConsoleUI
             car.BrandId = 4;
             car.ColorId = 6;
             car.ModelYear = "2000";
-            car.DailyPrice = 230;
-            car.Description = "Ferrari çok iyi";
+            car.DailyPrice = 0;
+            car.Description = "F";
 
-            carManager.Add(car);
-            carManager.Delete(new Car { CarId = 3002 });
-            carManager.Update(new Car
+
+            var result1 = carManager.Add(car);
+            if (result1.Success == false)
+            {
+                Console.WriteLine(result1.Message);
+            }
+            //carManager.Add(car);
+            //carManager.Delete(new Car { CarId = 4002 });
+            var result2 =carManager.Update(new Car
             {
                 CarId = 1,
                 BrandId = 1,
                 ColorId = 1,
                 ModelYear = "1990",
                 DailyPrice = 150,
-                Description = "6 kişilik",
+                Description = "8 kişilik",
                 CarName = "Bmw"
             });
-
-
-            Console.WriteLine(carManager.GetById(1).CarName);
-
-            foreach (var c in carManager.GetCarsByBrandId(7))
+            if (result2.Success == true)
             {
-                Console.WriteLine(c.Description);
+                Console.WriteLine(result2.Message);
             }
 
-            foreach (var c in carManager.GetCarDetails())
+
+            //Console.WriteLine(carManager.GetById(1).CarName);
+
+            //foreach (var c in carManager.GetCarsByBrandId(7))
+            //{
+            //    Console.WriteLine(c.Description);
+            //}
+            var result = carManager.GetCarDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine(c.CarName + " / " + c.BrandName + " / " + c.ColorName + " / " + c.DailyPrice);
+                foreach (var c in result.Data)
+                {
+                    Console.WriteLine(c.CarName + " / " + c.BrandName + " / " + c.ColorName + " / " + c.DailyPrice);
+                }
+            }
+
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
     }
