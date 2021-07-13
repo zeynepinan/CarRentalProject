@@ -14,5 +14,6 @@ namespace Business.Constants
         public static string CarsListed = "Arabalar listelendi";
         public static string CarPriceInValid = "Araba fiyatı geçersiz";
         public static string CarListedByColor = "Arabalar renklerine göre listelendi";
+        internal static string DeliveryProblem="Araba henüz teslim edilmemiş";
     }
 }
