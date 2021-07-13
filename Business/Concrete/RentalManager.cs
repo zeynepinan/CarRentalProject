@@ -20,12 +20,18 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.RentDate==null)
+            var addedRent = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            if (addedRent==null)
+            {
+
+                _rentalDal.Add(rental);
+                return new SuccessResult(Messages.Added);
+               
+            }
+            else
             {
                 return new ErrorResult(Messages.DeliveryProblem);
             }
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.Added);
         }
 
         public IResult Delete(Rental rental)

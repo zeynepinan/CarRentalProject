@@ -17,6 +17,39 @@ namespace ConsoleUI
             //BrandTest();
 
             //UserTest();
+
+            //CustomerTest();
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            Rental rental = new Rental();
+            rental.CarId = 3;
+            rental.CustomerId = 1;
+            rental.RentDate = new DateTime( 2021,07,13);
+
+            var result=rentalManager.Add(rental);
+
+            if (result.Success == true) 
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+
+            Customer customer = new Customer();
+            customer.UserId = 3;
+            customer.CompanyName = "Kiralama Şirketi B";
+
+            customerManager.Add(customer);
         }
 
         private static void UserTest()
